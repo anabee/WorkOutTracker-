@@ -36,8 +36,21 @@ const workoutSchema = new Schema({
         type: Number,
       },
 
-    }]
-      
+}]},
+    {
+      toJSON: {
+        virtuals: true
+      }
+});
+
+
+// adds a dynamically-created property to schema
+workoutSchema.virtual("totalDuration").get(function () {
+  // "reduce" array of exercises down to just the sum of their durations
+  console.log(this.exercises)
+  return this.exercises.reduce((total, exercise) => {
+    return total + exercise.duration;
+  }, 0);
 });
 
 const workoutData = mongoose.model("workoutData", workoutSchema);

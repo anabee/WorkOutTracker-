@@ -47,7 +47,6 @@ app.get("/api/workouts", (req, res)=>{
 })
 
 app.post("/api/workouts", (req, res) => {
-  // console.log(body)
   Workout.create({})
     .then(dbWorkout => {
       res.json(dbWorkout);
@@ -58,23 +57,12 @@ app.post("/api/workouts", (req, res) => {
 });
 
 app.put("/api/workouts/:id", (req, res) => {
-  console.log("---------------------")
-  console.log(req.body)
+
   Workout.findByIdAndUpdate(
     req.params.id,
     {
       $set: {
         exercises: req.body
-      // }
-      //   day: Date.now(),
-      //   excercises: req.body.excercises,
-      //   name: req.body.name,
-      //   distance: req.body.distance,
-      //   duration: req.body.duration,
-      //   weight: req.body.weight,
-      //   sets: req.body.sets,
-      //   reps: req.body.reps,
-      //   modified: Date.now()
       }
     },
   (error, data) => {
